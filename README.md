@@ -1,1 +1,2 @@
-# runestone-db
+# galactic-monitor
+Galactic monitor

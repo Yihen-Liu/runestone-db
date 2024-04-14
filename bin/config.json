@@ -1,0 +1,26 @@
+{
+  "Logger": {
+    "LogLevel": 1,
+    "LogFileDir": "./logs/"
+  },
+
+  "Database":{
+	"Type" :"postgres",
+	"User" : "octa8lab",
+	"Password" : "octa8lab",
+	"Host" : "10.1.1.116",
+	"Port" : "9021",
+	"Db" : "runestone"
+  },
+
+  "ChainRpc": {
+	"Sepolia":"https://sepolia.infura.io/v3/e29512aa48f946c3a4ea1edb08050320",
+	"Ethereum":"https://mainnet.infura.io/v3/e29512aa48f946c3a4ea1edb08050320",
+	"BNBChain":"https://api.bscscan.com/api?apikey=I66K5E72DI7Q5RYHFZFVENJGYVC1B7GBTV",
+	"Polygon":"https://polygon-mainnet.infura.io/v3/e29512aa48f946c3a4ea1edb08050320",
+	"Arbitrum":"https://arbitrum-mainnet.infura.io/v3/e29512aa48f946c3a4ea1edb08050320"
+  }
+}
+
+
+

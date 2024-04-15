@@ -12,4 +12,10 @@ func InitTables() {
 			panic("create etching table err:" + err.Error())
 		}
 	}
+
+	if db.Migrator().HasTable(&BlockInfo{}) == false {
+		if err := db.Migrator().CreateTable(&BlockInfo{}); err != nil {
+			panic("create blockinfo table err:" + err.Error())
+		}
+	}
 }

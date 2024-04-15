@@ -2,6 +2,21 @@ package models
 
 import "time"
 
+type BlockInfo struct {
+	ID                int32     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	Height            int32     `gorm:"column:height;not null; default:0" json:"height"`
+	Hash              string    `gorm:"column:hash;not null" json:"hash"`
+	PreviousBlockHash string    `gorm:"column:previous_block_hash;not null" json:"previous_block_hash"`
+	Time              int32     `gorm:"column:time;not null; default:0" json:"time"`
+	CreateAt          time.Time `gorm:"column:create_at; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP;<-:create" json:"create_at,omitempty"`
+	UpdateAt          time.Time `gorm:"column:update_at; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP; autoUpdateTime" json:"update_at,omitempty"`
+}
+
+// TableName Orderlist's table name
+func (*BlockInfo) TableName() string {
+	return "blockinfo"
+}
+
 type Etching struct {
 	ID                int32     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	Owner             string    `gorm:"column:owner;" json:"owner"`
@@ -14,13 +29,13 @@ type Etching struct {
 	Txid              string    `gorm:"column:txid;not null" json:"txid"`
 	Valid             bool      `gorm:"column:valid;not null; default:true" json:"valid"`
 	Divisibility      int32     `gorm:"column:divisibility;not null; default:0" json:"divisibility"`
-	Premine           string    `gorm:"column:premine;not null; default:''" json:"premine"`
+	Premine           string    `gorm:"column:premine;not null; default:'0'" json:"premine"`
 	Spacers           string    `gorm:"column:spacers;not null; default:''" json:"spacers"`
 	Symbol            string    `gorm:"column:symbol;not null; default:0" json:"symbol"`
-	Capacity          string    `gorm:"column:capacity;not null; default:0" json:"capacity"`
+	Capacity          string    `gorm:"column:capacity;not null; default:'0'" json:"capacity"`
 	MintAmount        int64     `gorm:"column:mint_amount;not null; default:0" json:"mint_amount"`
 	Offset            int32     `gorm:"column:offset;not null; default:0" json:"offset"`
-	StartHeight       int32     `gorm:"column:start_height;not null; default:0" json:"start_height"`
+	StartHeight       int32     `gorm:"column:start_height;not null; default:840000" json:"start_height"`
 	EndHeight         int32     `gorm:"column:end_height;not null; default:0" json:"end_height"`
 	UpdateAt          time.Time `gorm:"column:update_at; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP; autoUpdateTime" json:"update_at,omitempty"`
 	CreateAt          time.Time `gorm:"column:create_at; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP;<-:create" json:"create_at,omitempty"`

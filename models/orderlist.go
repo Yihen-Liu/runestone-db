@@ -21,6 +21,7 @@ type Etching struct {
 	ID                int32     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	Owner             string    `gorm:"column:owner;" json:"owner"`
 	RuneId            string    `gorm:"column:runeid;not null" json:"runeid"`
+	RuneTicker        string    `gorm:"column:rune_ticker;not null; unique" json:"rune_ticker"`
 	RuneName          string    `gorm:"column:rune_name;not null; unique" json:"rune_name"`
 	BlockHeight       int32     `gorm:"column:block_height;not null" json:"block_height"`
 	TxIndex           int32     `gorm:"column:tx_index;not null" json:"tx_index"`
@@ -30,13 +31,14 @@ type Etching struct {
 	Valid             bool      `gorm:"column:valid;not null; default:true" json:"valid"`
 	Divisibility      int32     `gorm:"column:divisibility;not null; default:0" json:"divisibility"`
 	Premine           string    `gorm:"column:premine;not null; default:'0'" json:"premine"`
-	Spacers           string    `gorm:"column:spacers;not null; default:''" json:"spacers"`
 	Symbol            string    `gorm:"column:symbol;not null; default:0" json:"symbol"`
 	Capacity          string    `gorm:"column:capacity;not null; default:'0'" json:"capacity"`
-	MintAmount        int64     `gorm:"column:mint_amount;not null; default:0" json:"mint_amount"`
-	Offset            int32     `gorm:"column:offset;not null; default:0" json:"offset"`
+	MintAmount        string    `gorm:"column:mint_amount;not null; default:0" json:"mint_amount"`
+	OffsetStart       int32     `gorm:"column:offset_start;not null; default:0" json:"offset_start"`
+	OffsetEnd         int32     `gorm:"column:offset_end;not null; default:0" json:"offset_end"`
 	StartHeight       int32     `gorm:"column:start_height;not null; default:840000" json:"start_height"`
 	EndHeight         int32     `gorm:"column:end_height;not null; default:0" json:"end_height"`
+	Turbo             bool      `gorm:"column:turbo;not null; default:false" json:"turbo"`
 	UpdateAt          time.Time `gorm:"column:update_at; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP; autoUpdateTime" json:"update_at,omitempty"`
 	CreateAt          time.Time `gorm:"column:create_at; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP;<-:create" json:"create_at,omitempty"`
 }
@@ -50,8 +52,8 @@ type RuneBalance struct {
 	ID                int32     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	Address           string    `gorm:"column:address;not null" json:"address"`
 	RuneId            string    `gorm:"column:runeid;not null" json:"runeid"`
-	RuneName          string    `gorm:"column:rune_name;not null" json:"rune_name"`
-	Balance           int64     `gorm:"column:balance;not null" json:"balance"`
+	RuneTicker        string    `gorm:"column:rune_ticker;not null" json:"rune_ticker"`
+	Balance           string    `gorm:"column:balance;not null" json:"balance"`
 	Txid              string    `gorm:"column:txid;not null" json:"txid"`
 	Vout              int32     `gorm:"column:vout;not null" json:"vout"`
 	BlockHeight       int32     `gorm:"column:block_height;not null" json:"block_height"`
@@ -65,6 +67,8 @@ type RuneBalance struct {
 func (*RuneBalance) TableName() string {
 	return "runebalance"
 }
+
+///////////////////////////////////////////DROP IN FUTURE//////////////////////////////////////////////////////
 
 type Blockchain struct {
 	ID          int32     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`

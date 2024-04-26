@@ -68,6 +68,33 @@ func (*RuneBalance) TableName() string {
 	return "runebalance"
 }
 
+type RuneMintCount struct {
+	ID          int32     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	BlockHeight int32     `gorm:"column:block_height;not null" json:"block_height"`
+	RuneId      string    `gorm:"column:runeid;not null" json:"runeid"`
+	Count       int32     `gorm:"column:count;not null" json:"count"`
+	LastUpdated time.Time `gorm:"column:last_updated; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP; autoUpdateTime" json:"last_updated,omitempty"`
+	CreateAt    time.Time `gorm:"column:create_at; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP;<-:create" json:"create_at,omitempty"`
+}
+
+// TableName Orderlist's table name
+func (*RuneMintCount) TableName() string {
+	return "runemintcount"
+}
+
+type BurnBalance struct {
+	ID          int32     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	RuneId      string    `gorm:"column:runeid;not null" json:"runeid"`
+	Amount      string    `gorm:"column:amount;not null" json:"amount"`
+	LastUpdated time.Time `gorm:"column:last_updated; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP; autoUpdateTime" json:"last_updated,omitempty"`
+	CreateAt    time.Time `gorm:"column:create_at; type:TIMESTAMPTZ;default:CURRENT_TIMESTAMP;<-:create" json:"create_at,omitempty"`
+}
+
+// TableName Orderlist's table name
+func (*BurnBalance) TableName() string {
+	return "burnbalance"
+}
+
 ///////////////////////////////////////////DROP IN FUTURE//////////////////////////////////////////////////////
 
 type Blockchain struct {

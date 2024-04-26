@@ -18,4 +18,16 @@ func InitTables() {
 			panic("create blockinfo table err:" + err.Error())
 		}
 	}
+
+	if db.Migrator().HasTable(&RuneMintCount{}) == false {
+		if err := db.Migrator().CreateTable(&RuneMintCount{}); err != nil {
+			panic("create rune-mint-count table err:" + err.Error())
+		}
+	}
+
+	if db.Migrator().HasTable(&BurnBalance{}) == false {
+		if err := db.Migrator().CreateTable(&BurnBalance{}); err != nil {
+			panic("create burnbalance table err:" + err.Error())
+		}
+	}
 }
